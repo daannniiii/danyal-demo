@@ -8,6 +8,7 @@ def tilleven (b):
         print(i)
 n = int (input("Enter a number:"))
 if noteven(n):
+    print("The number is even")
     tilleven(n)
 else:
     print("The number entered is odd")
