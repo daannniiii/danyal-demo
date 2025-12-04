@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UET Lahore - University Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+        header {
+            background: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        header img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        nav {
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+        nav a:hover {
+            color: #0056b3;
+        }
+        .container {
+            padding: 40px;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            padding: 10px 15px;
+            background: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background: #003f80;
+        }
+    </style>
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/UET_logo.png/220px-UET_logo.png" alt="UET Logo">
+        <h1>University of Engineering and Technology, Lahore</h1>
+    </header>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('login')">Login</a>
+        <a href="#" onclick="showPage('events')">Event Management</a>
+        <a href="#" onclick="showPage('seats')">Seat Booking</a>
+        <a href="#" onclick="showPage('departments')">Departments</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- HOME PAGE -->
+        <div id="home" class="section active">
+            <div class="card">
+                <h2>Welcome to UET Lahore</h2>
+                <p>The University of Engineering and Technology, Lahore is one of the top engineering universities in Pakistan. Explore our departments, book seats, manage events, or log in to your admin and student account.</p>
+            </div>
+        </div>
+
+        <!-- LOGIN PAGE -->
+        <div id="login" class="section">
+            <div class="card">
+                <h2>Login Portal</h2>
+                <p>Select your role and login below.</p>
+
+                <h3>Admin Login</h3>
+                <form>
+                    <input type="text" placeholder="Admin Username">
+                    <input type="password" placeholder="Password">
+                    <button>Login</button>
+                </form>
+
+                <h3>User Login</h3>
+                <form>
+                    <input type="text" placeholder="User Email">
+                    <input type="password" placeholder="Password">
+                    <button>Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- EVENT MANAGEMENT -->
+        <div id="events" class="section">
+            <div class="card">
+                <h2>University Event Management</h2>
+                <p>View and manage all university events.</p>
+                <form>
+                    <input type="text" placeholder="Event Title">
+                    <input type="date">
+                    <input type="text" placeholder="Venue">
+                    <button>Create Event</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Upcoming Events</h3>
+                <ul>
+                    <li>Sports Week - 22 Dec</li>
+                    <li>Science Exhibition - 4 Jan</li>
+                    <li>Orientation Day - 15 Jan</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SEAT BOOKING -->
+        <div id="seats" class="section">
+            <div class="card">
+                <h2>Seat Booking System</h2>
+                <p>Reserve your seat for library or lab.</p>
+                <form>
+                    <select>
+                        <option>Select Building</option>
+                        <option>Main Library</option>
+                        <option>Computer Lab</option>
+                        <option>Electronics Lab</option>
+                    </select>
+                    <input type="date">
+                    <button>Book Seat</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- DEPARTMENTS PAGE -->
+        <div id="departments" class="section">
+            <div class="card">
+                <h2>Departments of UET Lahore</h2>
+                <p>Explore our engineering and science departments.</p>
+
+                <h3>Computer Science Department</h3>
+                <p>Faculty: Highly qualified professors and researchers.<br>Facilities: Modern labs, software libraries, high-speed internet.</p>
+
+                <h3>Electrical Engineering Department</h3>
+                <p>Faculty: Experienced engineers and PhD scholars.<br>Facilities: Power systems lab, electronics lab.</p>
+
+                <h3>Mechanical Engineering Department</h3>
+                <p>Facilities: Workshops, thermodynamics lab, robotics research center.</p>
+
+                <h3>Civil Engineering Department</h3>
+                <p>Facilities: Survey labs, structural engineering labs.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
