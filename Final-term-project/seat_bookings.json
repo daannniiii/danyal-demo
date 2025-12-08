@@ -1,0 +1,100 @@
+{
+  "rows": 10,
+  "seats_per_row": 6,
+  "seats": [
+    [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      false,
+      false,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "bookings": {
+    "1A": {
+      "passenger": "Alia Batool",
+      "time": "2025-12-08 20:07:12"
+    },
+    "2B": {
+      "passenger": "Danyal Shoaib",
+      "time": "2025-12-08 20:08:14"
+    },
+    "2C": {
+      "passenger": "Fajal Noor",
+      "time": "2025-12-08 20:08:31"
+    }
+  }
+}

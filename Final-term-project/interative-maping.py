@@ -2,6 +2,7 @@ import os
 import json
 from datetime import datetime
 
+
 class SeatMap:
     def __init__(self, rows, seats_per_row):
         self.rows = rows
