@@ -172,7 +172,7 @@ def parse_seat_input(seat_input):
 
 
 def display_menu():
-    """Display the main menu"""
+    # Display the main menu
     print("\n" + "="*50)
     print("SEAT BOOKING SYSTEM".center(50))
     print("="*50)
