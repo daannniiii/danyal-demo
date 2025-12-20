@@ -141,6 +141,140 @@ class SeatMap:
             return False, f"Error loading file: {str(e)}"
 
 
+class StallMap:
+    def __init__(self, rows, stalls_per_row):
+        self.rows = rows
+        self.stalls_per_row = stalls_per_row
+        # Create stall map with all stalls available (True = available, False = occupied)
+        self.stalls = [[True for _ in range(stalls_per_row)] for _ in range(rows)]
+        self.bookings = {}  # Track who booked which stall
+    
+    def book_stall(self, row, stall, vendor_name=""):
+        """Book a stall (mark as occupied)"""
+        if 0 <= row < self.rows and 0 <= stall < self.stalls_per_row:
+            if self.stalls[row][stall]:
+                self.stalls[row][stall] = False
+                stall_label = f"{row+1}{chr(65+stall)}"
+                self.bookings[stall_label] = {
+                    "vendor": vendor_name,
+                    "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+                return True, stall_label
+            else:
+                return False, f"Stall {row+1}{chr(65+stall)} is already occupied!"
+        else:
+            return False, "Invalid stall position!"
+    
+    def cancel_stall(self, row, stall):
+        """Cancel a stall booking (mark as available)"""
+        if 0 <= row < self.rows and 0 <= stall < self.stalls_per_row:
+            if not self.stalls[row][stall]:
+                self.stalls[row][stall] = True
+                stall_label = f"{row+1}{chr(65+stall)}"
+                if stall_label in self.bookings:
+                    del self.bookings[stall_label]
+                return True, f"Stall {stall_label} has been cancelled successfully!"
+            else:
+                return False, f"Stall {row+1}{chr(65+stall)} is not booked!"
+        else:
+            return False, "Invalid stall position!"
+    
+    def get_available_stalls(self):
+        """Return list of available stalls"""
+        available = []
+        for row_idx, row in enumerate(self.stalls):
+            for stall_idx, is_available in enumerate(row):
+                if is_available:
+                    available.append(f"{row_idx+1}{chr(65+stall_idx)}")
+        return available
+    
+    def get_occupied_stalls(self):
+        """Return list of occupied stalls"""
+        occupied = []
+        for row_idx, row in enumerate(self.stalls):
+            for stall_idx, is_available in enumerate(row):
+                if not is_available:
+                    occupied.append(f"{row_idx+1}{chr(65+stall_idx)}")
+        return occupied
+    
+    def get_booking_info(self, row, stall):
+        """Get booking information for a specific stall"""
+        stall_label = f"{row+1}{chr(65+stall)}"
+        return self.bookings.get(stall_label, None)
+    
+    def display(self, show_legend=True):
+        """Display the stall map"""
+        print("\n" + "="*50)
+        print("STALL MAP".center(50))
+        print("="*50)
+        if show_legend:
+            print("[X] = Occupied  [ ] = Available")
+            print("="*50)
+        print()
+        
+        # Display column headers (A, B, C, D, etc.)
+        print("   ", end="")
+        for i in range(self.stalls_per_row):
+            print(f"  {chr(65+i)} ", end="")
+        print("\n")
+        
+        # Display rows with stall status
+        for row_idx, row in enumerate(self.stalls):
+            print(f"{row_idx+1:2d} ", end="")
+            for stall_idx, is_available in enumerate(row):
+                if is_available:
+                    print("[ ]", end=" ")
+                else:
+                    print("[X]", end=" ")
+            print()
+        
+        print("\n" + "="*50 + "\n")
+    
+    def get_statistics(self):
+        """Get booking statistics"""
+        total_stalls = self.rows * self.stalls_per_row
+        occupied = len(self.get_occupied_stalls())
+        available = total_stalls - occupied
+        occupancy_rate = (occupied / total_stalls) * 100
+        
+        return {
+            "total": total_stalls,
+            "occupied": occupied,
+            "available": available,
+            "occupancy_rate": occupancy_rate
+        }
+    
+    def save_to_file(self, filename="stall_bookings.json"):
+        """Save current bookings to a file"""
+        data = {
+            "rows": self.rows,
+            "stalls_per_row": self.stalls_per_row,
+            "stalls": self.stalls,
+            "bookings": self.bookings
+        }
+        try:
+            with open(filename, 'w') as f:
+                json.dump(data, f, indent=2)
+            return True, f"Bookings saved to {filename}"
+        except Exception as e:
+            return False, f"Error saving file: {str(e)}"
+    
+    def load_from_file(self, filename="stall_bookings.json"):
+        """Load bookings from a file"""
+        try:
+            with open(filename, 'r') as f:
+                data = json.load(f)
+            self.rows = data["rows"]
+            self.stalls_per_row = data["stalls_per_row"]
+            self.stalls = data["stalls"]
+            self.bookings = data["bookings"]
+            return True, f"Bookings loaded from {filename}"
+        except FileNotFoundError:
+            return False, "No saved bookings found"
+        except Exception as e:
+            return False, f"Error loading file: {str(e)}"
+
+
 def clear_screen():
     """Clear the console screen"""
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -174,8 +308,9 @@ def parse_seat_input(seat_input):
 def display_menu():
     # Display the main menu
     print("\n" + "="*50)
-    print("SEAT BOOKING SYSTEM".center(50))
+    print("SEAT & STALL BOOKING SYSTEM".center(50))
     print("="*50)
+    print("SEAT OPTIONS:")
     print("1. View Seat Map")
     print("2. Book a Seat")
     print("3. Cancel a Booking")
@@ -184,7 +319,18 @@ def display_menu():
     print("6. View Statistics")
     print("7. Save Bookings")
     print("8. Load Bookings")
-    print("9. Exit")
+    print()
+    print("VENDOR STALL OPTIONS:")
+    print("9. View Stall Map")
+    print("10. Book a Stall")
+    print("11. Cancel a Stall Booking")
+    print("12. View Available Stalls")
+    print("13. View Vendor Bookings")
+    print("14. View Stall Statistics")
+    print("15. Save Stall Bookings")
+    print("16. Load Stall Bookings")
+    print()
+    print("17. Exit")
     print("="*50)
 
 
@@ -333,75 +479,17 @@ def view_statistics(seat_map):
     input("\nPress Enter to continue...")
 
 
-def main():
-    """Main program loop"""
-    # Initialize seat map (10 rows, 6 seats per row - typical airplane layout)
-    seat_map = SeatMap(rows=10, seats_per_row=6)
+def book_stall_interactive(stall_map):
+    """Interactive stall booking"""
+    stall_map.display()
     
-    # Try to load previous bookings
-    success, message = seat_map.load_from_file()
-    if success:
-        print(f"✅ {message}")
+    available = stall_map.get_available_stalls()
+    if not available:
+        print("❌ Sorry, all stalls are fully booked!")
+        input("\nPress Enter to continue...")
+        return
     
-    while True:
-        clear_screen()
-        display_menu()
-        
-        choice = input("\nEnter your choice (1-10): ").strip()
-        
-        if choice == "1":
-            clear_screen()
-            seat_map.display()
-            input("\nPress Enter to continue...")
-        
-        elif choice == "2":
-            clear_screen()
-            book_seat_interactive(seat_map)
-        
-        elif choice == "3":
-            clear_screen()
-            cancel_seat_interactive(seat_map)
-        
-        elif choice == "4":
-            clear_screen()
-            view_available_seats(seat_map)
-        
-        elif choice == "5":
-            clear_screen()
-            view_bookings(seat_map)
-        
-        elif choice == "6":
-            clear_screen()
-            view_statistics(seat_map)
-        
-        elif choice == "7":
-            success, message = seat_map.save_to_file()
-            print(f"\n{'✅' if success else '❌'} {message}")
-            input("\nPress Enter to continue...")
-        
-        elif choice == "8":
-            success, message = seat_map.load_from_file()
-            print(f"\n{'✅' if success else '❌'} {message}")
-            input("\nPress Enter to continue...")
-        
-        elif choice == "9":
-            print("\n" + "="*50)
-            print("Thank you for using the Seat Booking System!".center(50))
-            print("="*50 + "\n")
-            
-            # Ask to save before exit
-            save = input("Save bookings before exit? (yes/no): ").strip().lower()
-            if save == 'yes':
-                seat_map.save_to_file()
-                print("✅ Bookings saved!")
-            
-            print("\nGoodbye! 👋\n")
-            break
-        
-        else:
-            print("\n❌ Invalid choice! Please enter a number between 1-9.")
-            input("\nPress Enter to continue...")
-
-
-if __name__ == "__main__":
-    main()
+    print(f"Available stalls: {len(available)}")
+    print("Enter stall in format: Row+Letter (e.g., 5B, 10A)")
+    
+    stall_input = input("\nEnter stall to book (or 'back' to return): ")
