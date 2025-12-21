@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Carnival Corner - Your ultimate destination for event management and ticket reservations in Pakistan">
+  <title>Carnival Corner - Event Management & Ticket Reservations</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/home.css">
+</head>
+
+<body>
+  <!-- HEADER & NAVIGATION -->
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo">Carnival Corner</div>
+
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="pages/bookings.html" class="nav-link">Bookings</a></li>
+        <li><a href="pages/events.html" class="nav-link">Events</a></li>
+        <li><a href="pages/login.html" class="nav-link login-btn">Login</a></li>
+        <li><a href="pages/about.html" class="nav-link">About + FAQs</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="section-hero">
+    <div class="hero-background">
+      <img src="./images/hero-carnival.jpg" alt="Carnival Corner Events" class="hero-image">
+      <div class="hero-overlay"></div>
+      <div class="hero-circle hero-circle-1"></div>
+      <div class="hero-circle hero-circle-2"></div>
+      <div class="hero-circle hero-circle-3"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">
+          Welcome to <span class="text-gradient">Carnival Corner</span>
+        </h1>
+        <p class="hero-subtitle">
+          Your Ultimate Destination for Unforgettable Events & Seamless Ticket Reservations
+        </p>
+        <p class="hero-description">
+          Discover amazing events, book your perfect seats, and create memories that last a lifetime.
+        </p>
+        <div class="hero-cta">
+          <a href="#city-selection" class="btn btn-primary">Explore Events</a>
+          <a href="pages/vendor.html" class="btn btn-secondary">Register as Vendor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITY SELECTION SECTION -->
+  <section class="section city-section" id="city-selection">
+    <div class="container">
+      <h2 class="section-title text-center fade-in">Select Your City</h2>
+      <p class="section-subtitle text-center fade-in">Choose from Pakistan's major cities to discover events near you
+      </p>
+
+      <div class="city-grid grid grid-3 fade-in">
+        <div class="city-card card" onclick="selectCity('Lahore')">
+          <div class="city-icon">🏛️</div>
+          <h3 class="city-name">Lahore</h3>
+          <p class="city-tagline">The Heart of Pakistan</p>
+          <div class="city-stats">
+            <span class="stat-item" id="lahore-events">Loading...</span>
+          </div>
+        </div>
+
+        <div class="city-card card" onclick="selectCity('Karachi')">
+          <div class="city-icon">🌊</div>
+          <h3 class="city-name">Karachi</h3>
+          <p class="city-tagline">City of Lights</p>
+          <div class="city-stats">
+            <span class="stat-item" id="karachi-events">Loading...</span>
+          </div>
+        </div>
+
+        <div class="city-card card" onclick="selectCity('Islamabad')">
+          <div class="city-icon">🏔️</div>
+          <h3 class="city-name">Islamabad</h3>
+          <p class="city-tagline">The Green Capital</p>
+          <div class="city-stats">
+            <span class="stat-item" id="islamabad-events">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA SELECTION SECTION (Initially Hidden) -->
+  <section class="section area-section" id="area-selection" style="display: none;">
+    <div class="container">
+      <div class="breadcrumb">
+        <span onclick="resetSelection()" style="cursor: pointer;">🏠 Home</span>
+        <span class="separator">›</span>
+        <span id="selected-city-breadcrumb">City</span>
+      </div>
+
+      <h2 class="section-title text-center">Select Your Area</h2>
+      <p class="section-subtitle text-center">Choose the area where you want to attend events</p>
+
+      <div class="area-grid grid grid-4" id="area-grid">
+        <!-- Areas will be populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED EVENTS PREVIEW -->
+  <section class="section featured-section">
+    <div class="container">
+      <h2 class="section-title text-center fade-in">Featured Events</h2>
+      <p class="section-subtitle text-center fade-in">Upcoming events you don't want to miss</p>
+
+      <div class="events-grid grid grid-3 fade-in" id="featured-events">
+        <!-- Featured events will be loaded dynamically -->
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="pages/events.html" class="btn btn-primary">View All Events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="section features-section">
+    <div class="container">
+      <h2 class="section-title text-center fade-in">Why Choose Carnival Corner?</h2>
+
+      <div class="features-grid grid grid-3 fade-in">
+        <div class="feature-card card">
+          <div class="feature-icon">🎟️</div>
+          <h3 class="card-title">Easy Booking</h3>
+          <p class="card-content">Book your tickets in just a few clicks with our intuitive interface</p>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">🪑</div>
+          <h3 class="card-title">Visual Seat Selection</h3>
+          <p class="card-content">Choose your perfect seat with our interactive seat map</p>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">🎪</div>
+          <h3 class="card-title">Diverse Events</h3>
+          <p class="card-content">From concerts to exhibitions, find events for every interest</p>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">💼</div>
+          <h3 class="card-title">Vendor Registration</h3>
+          <p class="card-content">Register your stall and reach thousands of event attendees</p>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">🔒</div>
+          <h3 class="card-title">Secure Payments</h3>
+          <p class="card-content">Your transactions are safe with our secure payment system</p>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">📱</div>
+          <h3 class="card-title">Mobile Friendly</h3>
+          <p class="card-content">Book tickets on the go with our responsive design</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="text-gradient">Carnival Corner</h3>
+          <p>Your trusted partner for event management and ticket reservations across Pakistan.</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pages/events.html">Browse Events</a></li>
+            <li><a href="pages/about.html">About Us</a></li>
+            <li><a href="pages/vendor.html">Become a Vendor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: info@carnivalcorner.pk</p>
+          <p>Phone: +92-300-1234567</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Carnival Corner. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="./js/main.js"></script>
+  <script src="./js/home.js"></script>
+</body>
+
+</html>
