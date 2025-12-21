@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Carnival Corner</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/bookings.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo" onclick="window.location.href='../index.html'">Carnival Corner</div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="bookings.html" class="nav-link">Bookings</a></li>
+                <li><a href="events.html" class="nav-link">Events</a></li>
+                <li><a href="login.html" class="nav-link login-btn">Login</a></li>
+                <li><a href="about.html" class="nav-link">About + FAQs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section bookings-section">
+        <div class="container">
+            <h1 class="page-title fade-in">My Bookings</h1>
+            <p class="page-subtitle fade-in">View and manage your event bookings</p>
+
+            <div class="bookings-grid" id="bookings-grid">
+                <!-- Bookings will be loaded dynamically -->
+            </div>
+
+            <div id="no-bookings" class="no-bookings" style="display: none;">
+                <div class="no-bookings-icon">📭</div>
+                <h3>No Bookings Yet</h3>
+                <p>You haven't made any bookings yet. Explore our events and book your tickets!</p>
+                <a href="events.html" class="btn btn-primary mt-3">Browse Events</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function loadBookings() {
+            const grid = document.getElementById('bookings-grid');
+            const noBookings = document.getElementById('no-bookings');
+
+            if (bookingsData.length === 0) {
+                grid.style.display = 'none';
+                noBookings.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noBookings.style.display = 'none';
+            grid.innerHTML = '';
+
+            bookingsData.forEach(booking => {
+                const event = getEventById(booking.eventId);
+                if (!event) return;
+
+                const card = document.createElement('div');
+                card.className = 'booking-card card fade-in';
+                card.innerHTML = `
+          <div class="booking-header">
+            <div class="booking-id">Booking #${booking.id.toString().padStart(6, '0')}</div>
+            <div class="booking-status status-${booking.status}">${booking.status}</div>
+          </div>
+          <h3 class="booking-event-name">${event.name}</h3>
+          <div class="booking-details">
+            <p>📍 ${event.venue}, ${event.area}, ${event.city}</p>
+            <p>📅 ${formatDate(event.date)} at ${formatTime(event.time)}</p>
+            <p>🪑 Seats: ${booking.seats.join(', ')}</p>
+            <p>👤 ${booking.userName}</p>
+          </div>
+          <div class="booking-footer">
+            <div class="booking-amount">Rs. ${booking.totalAmount.toLocaleString()}</div>
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='event-details.html?id=${event.id}'">View Event</button>
+          </div>
+        `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                loadBookings();
+            }, 200);
+        });
+    </script>
+</body>
+
+</html>

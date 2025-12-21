@@ -92,7 +92,7 @@
 .event-image {
     width: 100%;
     height: 200px;
-    background: linear-gradient(135deg, var(--light-teal), var(--purple-dark));
+    background: linear-gradient(135deg, #5D0486, var(--bright-orange));
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
     display: flex;

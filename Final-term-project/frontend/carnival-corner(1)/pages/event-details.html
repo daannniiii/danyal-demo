@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Event details and ticket booking">
+    <title>Event Details - Carnival Corner</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/event-details.css">
+</head>
+
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo" onclick="window.location.href='../index.html'">Carnival Corner</div>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="bookings.html" class="nav-link">Bookings</a></li>
+                <li><a href="events.html" class="nav-link">Events</a></li>
+                <li><a href="login.html" class="nav-link login-btn">Login</a></li>
+                <li><a href="about.html" class="nav-link">About + FAQs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- EVENT DETAILS SECTION -->
+    <section class="section event-details-section">
+        <div class="container">
+            <!-- Back Button -->
+            <button class="back-btn" onclick="window.history.back()">
+                ← Back to Events
+            </button>
+
+            <!-- Event Info -->
+            <div class="event-info-container" id="event-info">
+                <!-- Loaded dynamically -->
+            </div>
+
+            <!-- Seat Selection -->
+            <div class="seat-selection-container">
+                <h2 class="section-title">Select Your Seats</h2>
+                <p class="section-subtitle">Click on available seats to select them</p>
+
+                <div class="seat-selection-grid">
+                    <div class="seat-map-wrapper">
+                        <div id="seat-map-container">
+                            <!-- Seat map will be rendered here -->
+                        </div>
+                    </div>
+
+                    <div class="booking-panel card">
+                        <div id="booking-summary">
+                            <!-- Booking summary will be rendered here -->
+                        </div>
+
+                        <div class="booking-form">
+                            <h3>Your Information</h3>
+
+                            <div class="form-group">
+                                <label class="form-label" for="user-name">Full Name *</label>
+                                <input type="text" id="user-name" class="form-input" placeholder="Enter your name"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="user-email">Email Address *</label>
+                                <input type="email" id="user-email" class="form-input" placeholder="Enter your email"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="user-phone">Phone Number *</label>
+                                <input type="tel" id="user-phone" class="form-input" placeholder="+92-XXX-XXXXXXX"
+                                    required>
+                            </div>
+
+                            <button class="btn btn-primary btn-full" onclick="confirmBooking()">
+                                Confirm Booking
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h2>🎉 Booking Confirmed!</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Confirmation details -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Close</button>
+                <button class="btn btn-secondary" onclick="window.location.href='bookings.html'">View My
+                    Bookings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="text-gradient">Carnival Corner</h3>
+                    <p>Your trusted partner for event management and ticket reservations across Pakistan.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="events.html">Browse Events</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="vendor.html">Become a Vendor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@carnivalcorner.pk</p>
+                    <p>Phone: +92-300-1234567</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Carnival Corner. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/event-details.js"></script>
+</body>
+
+</html>
