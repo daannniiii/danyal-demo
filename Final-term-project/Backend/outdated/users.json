@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "password": "admin123",
+    "role": "admin",
+    "name": "Administrator"
+  },
+  "Danyal Shoaib": {
+    "password": "12345",
+    "role": "user",
+    "name": "Danyal Shoaib"
+  },
+  "": {
+    "password": "",
+    "role": "admin",
+    "name": "Danyal Shoaib"
+  }
+}
