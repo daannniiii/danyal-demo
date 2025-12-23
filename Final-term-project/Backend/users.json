@@ -1,0 +1,27 @@
+{
+  "admin": {
+    "password": "admin123",
+    "role": "admin",
+    "name": "Administrator"
+  },
+  "": {
+    "password": "",
+    "role": "admin",
+    "name": ""
+  },
+  "danyal": {
+    "password": "12345",
+    "role": "admin",
+    "name": "Danyal Shaoib#"
+  },
+  "user1": {
+    "password": "12345",
+    "role": "user",
+    "name": "Fajal Noor"
+  },
+  "vendor1": {
+    "password": "12345",
+    "role": "vendor",
+    "name": "Aqib Mustafa Khan"
+  }
+}

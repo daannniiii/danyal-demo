@@ -1,0 +1,16 @@
+{
+  "user1": [
+    {
+      "ticket_id": "TKT67428",
+      "event_id": "event1",
+      "seat": "1A",
+      "time": "2025-12-22 19:53:23"
+    },
+    {
+      "ticket_id": "TKT15576",
+      "event_id": "event2",
+      "seat": "1B",
+      "time": "2025-12-22 20:00:44"
+    }
+  ]
+}

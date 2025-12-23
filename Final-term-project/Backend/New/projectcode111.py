@@ -144,7 +144,7 @@ def display_seat_map(event):
         print(f"{row_idx+1:2d} ", end="")
         for seat_idx, is_available in enumerate(row):
             if seat_idx == seats_per_row // 2:
-                print("  ", end="")  # Aisle space
+                print("  ", end="")  # extra space for alignment of the seat map;
             
             if is_available:
                 print("[ ]", end=" ")
@@ -212,8 +212,8 @@ def login():
     username = input("Username: ").strip()
     password = input("Password: ").strip()
     
-    if username in users:
-        if users[username]['password'] == password:
+    if username in users: # checks if the username exists in users or not 
+        if users[username]['password'] == password: # checks if the password is correct or not 
             print(f"\n✅ Login successful! Welcome, {users[username]['name']}")
             pause()
             return username, users[username]['role']
@@ -300,7 +300,7 @@ def browse_events(is_guest=False):
         print(f"Name: {event['name']}")
         print(f"Date: {event['date']}")
         print(f"Location: {event['location']}")
-        print(f"Price: ${event['price']}")
+        print(f"Price: {event['price']}")
         print(f"Seats Available: {available_seats}/{total_seats}")
         print(f"Vendor Slots Available: {get_available_vendor_slots(event)}/{event['total_vendor_slots']}")
     
@@ -323,24 +323,24 @@ def view_event_details(is_guest=False):
         pause()
         return None
     
-    # Show event list
+    # Show all event list
     for event_id in events.keys():
-        print(f"  {event_id}. {events[event_id]['name']}")
+        print(f"  {event_id}. {events[event_id]['name']}") # Prints event id and its name 
     
     event_id = input("\nEnter Event ID: ").strip()
     
-    if event_id not in events:
+    if event_id not in events: # checks if the entered id is in events or not 
         print("\n❌ Event not found!")
         pause()
         return None
     
-    event = events[event_id]
+    event = events[event_id] # gets a;; the info of the event 
     
     clear_screen()
     print_header(f"EVENT: {event['name']}")
     print(f"\nDate: {event['date']}")
     print(f"Location: {event['location']}")
-    print(f"Price: ${event['price']}")
+    print(f"Price: {event['price']}")
     print(f"Description: {event['description'] if event['description'] else 'No description'}")
     print(f"\n{'─'*60}")
     print(f"Total Seats: {get_total_seats(event)}")
@@ -358,7 +358,7 @@ def guest_mode():
     """Guest browsing mode"""
     while True:
         clear_screen()
-        print_header("GUEST MODE - FESTIO EVENT PLATFORM")
+        print_header("GUEST MODE - CARNIVAL CORNER EVENT PLATFORM")
         
         print("\n1. Browse Events")
         print("2. View Event Details")
@@ -379,7 +379,7 @@ def guest_mode():
         elif choice == '4':
             register()
         elif choice == '5':
-            print("\n👋 Thank you for visiting FESTIO!")
+            print("\n👋 Thank you for visiting Carnival Corner!")
             return None, None
         else:
             print("\n❌ Invalid choice!")
@@ -393,8 +393,8 @@ def user_dashboard(username):
     
     while True:
         clear_screen()
-        print_header(f"USER DASHBOARD - {users[username]['name']}")
-        
+        print_header(f"USER DASHBOARD - {users[username]['name']}") # prints the name of the user from user.json
+        # print_header is defined by us to print the whole style of the header 
         print("\n1. Browse Events")
         print("2. Book Ticket")
         print("3. My Bookings")
@@ -469,7 +469,7 @@ def book_ticket(username):
     print("─"*60)
     print(f"Event: {event['name']}")
     print(f"Seat: {message}")
-    print(f"Price: ${event['price']}")
+    print(f"Price: {event['price']}")
     
     confirm = input("\nProceed to payment? (yes/no): ").strip().lower()
     
@@ -754,7 +754,7 @@ def create_event_admin():
     name = input("Event Name: ").strip()
     date = input("Date (e.g., 2025-01-15): ").strip()
     location = input("Location: ").strip()
-    price = float(input("Ticket Price: $").strip())
+    price = float(input("Ticket Price: ").strip())
     
     rows = int(input("Number of seat rows: ").strip())
     seats_per_row = int(input("Seats per row: ").strip())
@@ -791,7 +791,7 @@ def view_all_events_admin():
         print(f"Name: {event['name']}")
         print(f"Date: {event['date']}")
         print(f"Location: {event['location']}")
-        print(f"Price: ${event['price']}")
+        print(f"Price: {event['price']}")
         print(f"Seats: {booked_seats}/{total_seats} booked")
         print(f"Vendors: {len([v for v in event['vendor_bookings'].values() if v['status']=='approved'])}/{event['total_vendor_slots']} approved")
     
@@ -839,7 +839,7 @@ def edit_event():
     elif choice == '3':
         event['location'] = input("New Location: ").strip()
     elif choice == '4':
-        event['price'] = float(input("New Price: $").strip())
+        event['price'] = float(input("New Price: ").strip())
     elif choice == '5':
         event['total_vendor_slots'] = int(input("New Vendor Slots: ").strip())
     elif choice == '6':
@@ -1016,7 +1016,7 @@ def view_statistics():
     print(f"Total Users: {total_users}")
     print(f"Total Vendors: {total_vendors}")
     print(f"Total Bookings: {total_bookings}")
-    print(f"Total Revenue: ${total_revenue:.2f}")
+    print(f"Total Revenue: {total_revenue:.2f}")
     
     print(f"\n{'─'*60}")
     print("EVENT-WISE BREAKDOWN")
@@ -1030,7 +1030,7 @@ def view_statistics():
         
         print(f"\n{event['name']}")
         print(f"  Bookings: {bookings_count}/{total_seats} ({occupancy:.1f}%)")
-        print(f"  Revenue: ${revenue:.2f}")
+        print(f"  Revenue: {revenue:.2f}")
     
     pause()
 
@@ -1044,7 +1044,7 @@ def main():
     
     # Welcome screen
     clear_screen()
-    print_header("WELCOME TO FESTIO")
+    print_header("WELCOME TO CARNIVAL CORNER")
     print("\n🎉 Your Complete Event Management Platform 🎉")
     print("\nBook tickets, manage events, and connect with vendors!")
     print("\nFeatures:")
@@ -1067,7 +1067,7 @@ def main():
                 # User chose to exit
                 break
         
-        # Role-based dashboard
+        # Role-based selection
         if current_role == 'user':
             user_dashboard(current_user)
             current_user = None
@@ -1081,7 +1081,7 @@ def main():
             current_user = None
     
     print("\n" + "="*60)
-    print("Thank you for using FESTIO!".center(60))
+    print("Thank you for using Carnival Corner!".center(60))
     print("="*60 + "\n")
 
 if __name__ == "__main__":
