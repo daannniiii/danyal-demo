@@ -86,7 +86,7 @@ def save_bookings(bookings):
     with open(BOOKINGS_FILE, 'w') as f:
         json.dump(bookings, f, indent=2)
 
-# ==================== SEAT MAP FUNCTIONS ====================
+# ================= SEAT MAP FUNCTIONS ===============
 
 def create_seat_map(rows, seats_per_row):
     """Create a new seat map (True = available, False = occupied)"""
@@ -164,7 +164,7 @@ def get_total_seats(event):
     """Get total number of seats"""
     return event['rows'] * event['seats_per_row']
 
-# ==================== EVENT FUNCTIONS ====================
+# =============== EVENT FUNCTIONS =================
 
 def create_event(event_id, name, date, location, price, rows, seats_per_row, vendor_slots, description=""):
     """Create a new event"""
@@ -188,7 +188,7 @@ def get_available_vendor_slots(event):
     approved = sum(1 for v in event['vendor_bookings'].values() if v['status'] == 'approved')
     return event['total_vendor_slots'] - approved
 
-# ==================== BOOKING FUNCTIONS ====================
+# ================= BOOKING FUNCTIONS ==========================
 
 def add_user_booking(bookings, username, event_id, seat_label, ticket_id):
     """Add a booking for a user"""
@@ -202,7 +202,7 @@ def add_user_booking(bookings, username, event_id, seat_label, ticket_id):
         'time': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
-# ==================== AUTHENTICATION ====================
+# ============================ AUTHENTICATION ===================
 
 def login():
     """Handle user login"""
@@ -277,7 +277,7 @@ def register():
     print(f"\n✅ Registration successful! You can now login as {role}.")
     pause()
 
-# ==================== GUEST MODULE ====================
+# ========================== GUEST MODULE ================
 
 def browse_events(is_guest=False):
     """Display all events"""
