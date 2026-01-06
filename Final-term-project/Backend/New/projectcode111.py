@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 import random
 
-# ==================== FILE PATHS ====================
+# ============ FILE PATHS ====================
 USERS_FILE = "users.json"
 EVENTS_FILE = "events.json"
 BOOKINGS_FILE = "user_bookings.json"
@@ -24,7 +24,7 @@ def pause():
     """Pause and wait for user input"""
     input("\nPress Enter to continue...")
 
-# ==================== FILE OPERATIONS ====================
+# ======= FILE OPERATIONS ====================
 
 def initialize_files():
     """Create JSON files if they don't exist"""
@@ -86,11 +86,17 @@ def save_bookings(bookings):
     with open(BOOKINGS_FILE, 'w') as f:
         json.dump(bookings, f, indent=2)
 
-# ================= SEAT MAP FUNCTIONS ===============
+# ============= SEAT MAP FUNCTIONS ===============
 
 def create_seat_map(rows, seats_per_row):
-    """Create a new seat map (True = available, False = occupied)"""
-    return [[True for _ in range(seats_per_row)] for _ in range(rows)]
+    """Create a new seat map 
+    this is a nested list constructor 
+        _ is a variable but shows that im not gonna use it """ 
+    seatm = [[True for _ in range(seats_per_row)]
+                for _ in range(rows)
+                ]
+    
+    return seatm
 
 def book_seat(event, row, seat, username):
     """Book a seat for a user"""
@@ -98,7 +104,7 @@ def book_seat(event, row, seat, username):
     seats_per_row = event['seats_per_row']
     seat_map = event['seats']
     
-    if 0 <= row < rows and 0 <= seat < seats_per_row:
+    if ((0 <= row and row < rows) and (0 <= seat and seat < seats_per_row)):
         if seat_map[row][seat]:
             seat_map[row][seat] = False
             seat_label = f"{row+1}{chr(65+seat)}"
@@ -117,7 +123,7 @@ def cancel_seat(event, row, seat):
     seats_per_row = event['seats_per_row']
     seat_map = event['seats']
     
-    if 0 <= row < rows and 0 <= seat < seats_per_row:
+    if 0 <= row and row < rows and 0 <= seat and seat < seats_per_row:
         if not seat_map[row][seat]:
             seat_map[row][seat] = True
             seat_label = f"{row+1}{chr(65+seat)}"
@@ -143,9 +149,6 @@ def display_seat_map(event):
     for row_idx, row in enumerate(seat_map):
         print(f"{row_idx+1:2d} ", end="")
         for seat_idx, is_available in enumerate(row):
-            if seat_idx == seats_per_row // 2:
-                print("  ", end="")  # extra space for alignment of the seat map;
-            
             if is_available:
                 print("[ ]", end=" ")
             else:
@@ -168,7 +171,7 @@ def get_total_seats(event):
 
 def create_event(event_id, name, date, location, price, rows, seats_per_row, vendor_slots, description=""):
     """Create a new event"""
-    return {
+    event = {
         'event_id': event_id,
         'name': name,
         'date': date,
@@ -182,10 +185,15 @@ def create_event(event_id, name, date, location, price, rows, seats_per_row, ven
         'vendor_bookings': {},
         'description': description
     }
+    return event 
 
 def get_available_vendor_slots(event):
     """Get number of available vendor slots"""
-    approved = sum(1 for v in event['vendor_bookings'].values() if v['status'] == 'approved')
+    inuse = 0 
+    for v in event['vendor_bookings'].values():
+        if v['status'] == 'approved':
+            inuse +=1 
+    approved = inuse 
     return event['total_vendor_slots'] - approved
 
 # ================= BOOKING FUNCTIONS ==========================
@@ -202,7 +210,7 @@ def add_user_booking(bookings, username, event_id, seat_label, ticket_id):
         'time': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
 
-# ============================ AUTHENTICATION ===================
+# ========= AUTHENTICATION ===================
 
 def login():
     """Handle user login"""
@@ -277,7 +285,7 @@ def register():
     print(f"\n✅ Registration successful! You can now login as {role}.")
     pause()
 
-# ========================== GUEST MODULE ================
+# ========== GUEST MODULE ================
 
 def browse_events(is_guest=False):
     """Display all events"""
@@ -355,8 +363,8 @@ def view_event_details(is_guest=False):
     return event_id
 
 def guest_mode():
-    """Guest browsing mode"""
-    while True:
+    # Guest browsing mode
+    while True: # keeps the guest menu running continuously until the user chooses to login, register successfully, or exit.
         clear_screen()
         print_header("GUEST MODE - CARNIVAL CORNER EVENT PLATFORM")
         
@@ -385,13 +393,13 @@ def guest_mode():
             print("\n❌ Invalid choice!")
             pause()
 
-# ==================== USER MODULE ====================
+# ============ USER MODULE ====================
 
 def user_dashboard(username):
     """User dashboard"""
     users = load_users()
     
-    while True:
+    while True: # make it run in a loop until user enters a trigger 
         clear_screen()
         print_header(f"USER DASHBOARD - {users[username]['name']}") # prints the name of the user from user.json
         # print_header is defined by us to print the whole style of the header 
@@ -421,7 +429,7 @@ def book_ticket(username):
     event_id = view_event_details()
     
     if not event_id:
-        return
+        return None 
     
     events = load_events()
     event = events[event_id]
@@ -429,7 +437,7 @@ def book_ticket(username):
     if get_available_seats(event) == 0:
         print("\n❌ Sorry, event is fully booked!")
         pause()
-        return
+        return None 
     
     print("\n" + "─"*60)
     print("SEAT MAP")
@@ -453,7 +461,7 @@ def book_ticket(username):
         return
     
     row = int(row_str) - 1
-    seat = ord(seat_letter) - 65
+    seat = ord(seat_letter) - 65 # ord converts the letter to its ASCI or unicode 
     
     # Book the seat
     success, message = book_seat(event, row, seat, username)
@@ -536,7 +544,7 @@ def view_my_bookings(username):
     print(f"\n{'─'*60}")
     pause()
 
-# ==================== VENDOR MODULE ====================
+# =============== VENDOR MODULE ====================
 
 def vendor_dashboard(username):
     """Vendor dashboard"""
@@ -641,7 +649,7 @@ def apply_for_stall(username):
     
     confirm = input("\nSubmit application? (yes/no): ").strip().lower()
     
-    if confirm == 'yes':
+    if confirm == 'yes' or 'y':
         event['vendor_bookings'][username] = {
             'status': 'pending',
             'time': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -694,7 +702,7 @@ def view_vendor_applications(username):
     print(f"\n{'─'*60}")
     pause()
 
-# ==================== ADMIN MODULE ====================
+# ================ ADMIN MODULE ====================
 
 def admin_dashboard(username):
     """Admin dashboard"""
@@ -861,7 +869,7 @@ def delete_event():
     events = load_events()
     
     if not events:
-        print("\n❌ No events to delete.")
+        print("\n❌ No events to delete alr.")
         pause()
         return
     
@@ -879,7 +887,7 @@ def delete_event():
     
     confirm = input(f"\nDelete '{event['name']}'? (yes/no): ").strip().lower()
     
-    if confirm == 'yes':
+    if confirm == 'yes' or 'y':
         del events[event_id]
         save_events(events)
         print("\n✅ Event deleted successfully!")
@@ -959,7 +967,7 @@ def review_vendor_applications():
         app_num = int(app_num)
         if app_num == 0:
             return
-        if 1 <= app_num <= len(pending_apps):
+        if 1 <= app_num and app_num <= len(pending_apps):
             selected = pending_apps[app_num - 1]
             
             print("\n1. Approve")
@@ -1002,7 +1010,7 @@ def view_statistics():
     
     total_events = len(events)
     total_users = len([u for u in users.values() if u['role'] == 'user'])
-    total_vendors = len([u for u in users.values() if u['role'] == 'vendor'])
+    total_vendors = len([v for v in users.values() if v['role'] == 'vendor'])
     
     total_bookings = 0
     total_revenue = 0
@@ -1026,7 +1034,10 @@ def view_statistics():
         bookings_count = len(event['bookings'])
         revenue = bookings_count * event['price']
         total_seats = get_total_seats(event)
-        occupancy = (bookings_count / total_seats * 100) if total_seats > 0 else 0
+        if total_seats > 0:
+            occupancy = (bookings_count / total_seats * 100)
+        else: 
+            occupancy = 0
         
         print(f"\n{event['name']}")
         print(f"  Bookings: {bookings_count}/{total_seats} ({occupancy:.1f}%)")
@@ -1034,7 +1045,7 @@ def view_statistics():
     
     pause()
 
-# ==================== MAIN PROGRAM ====================
+# ================= MAIN PROGRAM ====================
 
 def main():
     """Main program entry point"""

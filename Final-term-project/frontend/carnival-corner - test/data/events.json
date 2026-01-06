@@ -1,0 +1,151 @@
+[
+    {
+        "id": 1,
+        "name": "Summer Music Festival",
+        "city": "Lahore",
+        "area": "Gulberg",
+        "venue": "Fortress Stadium",
+        "date": "2025-01-15",
+        "time": "18:00",
+        "description": "Join us for an unforgettable evening of live music featuring top artists from across Pakistan!",
+        "price": 2500,
+        "category": "Music",
+        "image": "music-festival.jpg",
+        "totalSeats": 100,
+        "seating": {
+            "rows": 10,
+            "seatsPerRow": 10,
+            "bookedSeats": [
+                "A1",
+                "A2",
+                "B5",
+                "C3",
+                "D7",
+                "E2",
+                "F8"
+            ]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Food Carnival Extravaganza",
+        "city": "Karachi",
+        "area": "Clifton",
+        "venue": "Sea View Arena",
+        "date": "2025-01-20",
+        "time": "12:00",
+        "description": "Experience the finest cuisines from around the world in this massive food festival!",
+        "price": 1500,
+        "category": "Food",
+        "image": "food-carnival.jpg",
+        "totalSeats": 200,
+        "seating": {
+            "rows": 10,
+            "seatsPerRow": 20,
+            "bookedSeats": [
+                "A1",
+                "A2",
+                "A3",
+                "B10",
+                "C5"
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Tech Innovation Summit",
+        "city": "Islamabad",
+        "area": "F-7",
+        "venue": "Convention Center",
+        "date": "2025-02-05",
+        "time": "09:00",
+        "description": "Discover the latest in technology and innovation with industry leaders and entrepreneurs.",
+        "price": 3000,
+        "category": "Technology",
+        "image": "tech-summit.jpg",
+        "totalSeats": 150,
+        "seating": {
+            "rows": 15,
+            "seatsPerRow": 10,
+            "bookedSeats": [
+                "A5",
+                "B3",
+                "C1",
+                "D9"
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Art & Culture Exhibition",
+        "city": "Lahore",
+        "area": "DHA",
+        "venue": "Arts Council",
+        "date": "2025-02-10",
+        "time": "10:00",
+        "description": "Explore contemporary art, traditional crafts, and cultural performances.",
+        "price": 1000,
+        "category": "Art",
+        "image": "art-exhibition.jpg",
+        "totalSeats": 80,
+        "seating": {
+            "rows": 8,
+            "seatsPerRow": 10,
+            "bookedSeats": [
+                "A1",
+                "B2",
+                "C3"
+            ]
+        }
+    },
+    {
+        "id": 5,
+        "name": "Comedy Night Live",
+        "city": "Karachi",
+        "area": "DHA",
+        "venue": "The Comedy Club",
+        "date": "2025-01-25",
+        "time": "20:00",
+        "description": "Laugh your heart out with Pakistan's finest stand-up comedians!",
+        "price": 2000,
+        "category": "Entertainment",
+        "image": "comedy-night.jpg",
+        "totalSeats": 120,
+        "seating": {
+            "rows": 12,
+            "seatsPerRow": 10,
+            "bookedSeats": [
+                "A1",
+                "A2",
+                "B1",
+                "C5",
+                "D3"
+            ]
+        }
+    },
+    {
+        "id": 6,
+        "name": "Gaming Championship",
+        "city": "Islamabad",
+        "area": "Blue Area",
+        "venue": "Gaming Arena",
+        "date": "2025-02-15",
+        "time": "14:00",
+        "description": "Compete or spectate the most intense gaming tournament in Pakistan!",
+        "price": 1800,
+        "category": "Gaming",
+        "image": "gaming-championship.jpg",
+        "totalSeats": 100,
+        "seating": {
+            "rows": 10,
+            "seatsPerRow": 10,
+            "bookedSeats": [
+                "A1",
+                "B2",
+                "C3",
+                "D4",
+                "E5"
+            ]
+        }
+    }
+]

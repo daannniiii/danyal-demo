@@ -4,14 +4,14 @@
     "role": "admin",
     "name": "Administrator"
   },
-  "Danyal Shoaib": {
+  "danyal": {
     "password": "12345",
-    "role": "user",
-    "name": "Danyal Shoaib"
-  },
-  "": {
-    "password": "",
     "role": "admin",
     "name": "Danyal Shoaib"
+  },
+  "fajal": {
+    "password": "12345",
+    "role": "user",
+    "name": "Fajal Noor"
   }
 }

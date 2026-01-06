@@ -258,7 +258,7 @@
 }
 
 .area-card:hover {
-    background: linear-gradient(135deg, rgba(93, 4, 134, 0.6), rgba(255, 215, 0, 0.2));
+    background: linear-gradient(135deg, rgba(245, 244, 246, 0.6), rgba(255, 215, 0, 0.2));
 }
 
 .area-name {
