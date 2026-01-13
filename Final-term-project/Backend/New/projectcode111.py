@@ -14,6 +14,7 @@ def clear_screen():
     """Clear the console screen"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
+
 def print_header(title):
     """Print a formatted header"""
     print("\n" + "="*60)
@@ -125,7 +126,7 @@ def cancel_seat(event, row, seat):
     
     if 0 <= row and row < rows and 0 <= seat and seat < seats_per_row:
         if not seat_map[row][seat]:
-            seat_map[row][seat] = True
+            seat_map[row][seat] = True #dddddd
             seat_label = f"{row+1}{chr(65+seat)}"
             if seat_label in event['bookings']:
                 del event['bookings'][seat_label]
@@ -461,7 +462,7 @@ def book_ticket(username):
         return
     
     row = int(row_str) - 1
-    seat = ord(seat_letter) - 65 # ord converts the letter to its ASCI or unicode 
+    seat = ord(seat_letter) - 65 # ord converts the letter to its ASCII or unicode 
     
     # Book the seat
     success, message = book_seat(event, row, seat, username)
